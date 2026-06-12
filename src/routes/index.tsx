@@ -244,6 +244,11 @@ function Home() {
               </motion.div>
             ))}
           </div>
+          <div className="mt-12 text-center">
+            <Link to="/meals" className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy shadow-luxe transition hover:scale-105">
+              View All Meals <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -277,6 +282,11 @@ function Home() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link to="/rooms" className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy shadow-luxe transition hover:scale-105">
+            View All Rooms <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </section>
 
