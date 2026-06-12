@@ -8,8 +8,8 @@ import heroHotel from "@/assets/hero-hotel.jpg";
 import heroRestaurant from "@/assets/hero-restaurant.jpg";
 import heroRoom from "@/assets/hero-room.jpg";
 import idly from "@/assets/food-idly.jpg";
-import dosa from "@/assets/food-dosa.jpg";
-import vada from "@/assets/food-vada.jpg";
+import masalaDosa from "@/assets/food-masala-dosa.jpg";
+import vadaSambar from "@/assets/food-vada-sambar.jpg";
 import bonda from "@/assets/food-bonda.jpg";
 import mealsAndhra from "@/assets/meals-andhra.jpg";
 import mealsVeg from "@/assets/meals-veg.jpg";
@@ -140,8 +140,8 @@ function Counter({ end, suffix = "+", label }: { end: number; suffix?: string; l
 
 const tiffins = [
   { name: "Idly", price: 36, img: idly },
-  { name: "Masala Dosa", price: 45, img: dosa },
-  { name: "Vada Sambar", price: 45, img: vada },
+  { name: "Masala Dosa", price: 45, img: masalaDosa },
+  { name: "Vada Sambar", price: 45, img: vadaSambar },
   { name: "Mysore Bonda", price: 40, img: bonda },
 ];
 
@@ -244,6 +244,11 @@ function Home() {
               </motion.div>
             ))}
           </div>
+          <div className="mt-12 text-center">
+            <Link to="/meals" className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy shadow-luxe transition hover:scale-105">
+              View All Meals <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -277,6 +282,11 @@ function Home() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link to="/rooms" className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy shadow-luxe transition hover:scale-105">
+            View All Rooms <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </section>
 
