@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X, MessageCircle, Phone } from "lucide-react";
 import { useEffect } from "react";
 import type { MenuItem } from "@/data/menu";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export function MenuItemModal({
   item,
@@ -24,28 +25,14 @@ export function MenuItemModal({
   }, [open, onClose]);
 
   const handleWhatsAppEnquiry = () => {
-    const message = `Hello Vihari Vindu,
+    openWhatsApp(`Hello Vihari Vindu,
 
 I would like to enquire about:
 
 Product: ${item.name}
 Price: ₹${item.price}
 
-Please provide more details.
-
-Name:
-Phone:
-
-Thank You.`;
-
-    const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/919121023555?text=${encoded}`;
-    const webUrl = `https://web.whatsapp.com/send?phone=919121023555&text=${encoded}`;
-
-    const popup = window.open(waUrl, "_blank");
-    if (!popup) {
-      window.location.href = waUrl;
-    }
+Please provide more details.`);
   };
 
   return (

@@ -3,9 +3,8 @@ import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
+import { DEFAULT_WHATSAPP_MESSAGE, openWhatsApp } from "@/lib/whatsapp";
 import heroRestaurant from "@/assets/hero-restaurant.jpg";
-
-const WHATSAPP_PHONE = "919121023555";
 
 type ContactForm = {
   name: string;
@@ -16,22 +15,16 @@ type ContactForm = {
 
 type RequiredField = "name" | "phone" | "message";
 
-const buildWhatsAppUrl = (form: ContactForm) => {
-  const whatsappMessage = `Hello Vihari Vindu,
+const buildContactMessage = (form: ContactForm) => `Hello Vihari Vindu,
 
 Name: ${form.name.trim()}
-
 Phone: ${form.phone.trim()}
-
 Email: ${form.email.trim()}
 
 Message:
 ${form.message.trim()}
 
-I am contacting you through your website.`;
-
-  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
-};
+I am contacting through your website.`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -82,11 +75,7 @@ function ContactPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    const whatsappURL = buildWhatsAppUrl(form);
-    const whatsappWindow = window.open(whatsappURL, "_blank");
-    if (!whatsappWindow) {
-      window.location.href = whatsappURL;
-    }
+    openWhatsApp(buildContactMessage(form));
 
     setForm({ name: "", phone: "", email: "", message: "" });
     setErrors({});
@@ -187,19 +176,13 @@ function ContactPage() {
             >
               <Phone className="h-4 w-4" /> Call Now
             </a>
-            <a
-              href={
-                "https://wa.me/919121023555?text=" +
-                encodeURIComponent(
-                  "Hello Vihari Vindu, I would like to know more about your rooms and food services.",
-                )
-              }
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => openWhatsApp(DEFAULT_WHATSAPP_MESSAGE)}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
+            </button>
           </div>
         </motion.div>
 

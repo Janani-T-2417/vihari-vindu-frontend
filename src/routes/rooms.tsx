@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Wifi, Tv, Car, Bell, Snowflake, MessageCircle, BedDouble } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
+import { openWhatsApp } from "@/lib/whatsapp";
 import roomDeluxe from "@/assets/room-deluxe.jpg";
 import roomDouble from "@/assets/room-double.jpg";
 import roomFamily from "@/assets/room-family.jpg";
@@ -36,8 +37,8 @@ const rooms = [
   { name: "Premium AC Room", price: "₹3,800", img: roomPremium, desc: "Our most refined room — king bed, lounge corner and panoramic views." },
 ];
 
-const wa = (n: string) =>
-  "https://wa.me/919121023555?text=" + encodeURIComponent(`Hello, I would like to book: ${n} at Vihari Vindu.`);
+const roomEnquiryMessage = (n: string) =>
+  `Hello Vihari Vindu,\n\nI would like to enquire about:\n\nRoom Type: ${n}\n\nPlease share availability and pricing details.`;
 
 function RoomsPage() {
   return (
@@ -83,10 +84,10 @@ function RoomsPage() {
               </div>
 
               <div className="mt-auto flex flex-col gap-2 pt-7 sm:flex-row">
-                <a href={wa(r.name)} target="_blank" rel="noopener noreferrer"
+                <button type="button" onClick={() => openWhatsApp(roomEnquiryMessage(r.name))}
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:scale-[1.02]">
-                  <MessageCircle className="h-4 w-4" /> Book Enquiry
-                </a>
+                  <MessageCircle className="h-4 w-4" /> Enquire Now
+                </button>
                 <a href="tel:+919121023555"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe transition hover:scale-[1.02]">
                   <BedDouble className="h-4 w-4" /> Call to Book

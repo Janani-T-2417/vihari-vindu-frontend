@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { Logo } from "./Logo";
+import { DEFAULT_WHATSAPP_MESSAGE, openWhatsApp } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
@@ -52,6 +53,15 @@ export function Footer() {
             <li className="flex gap-3"><Phone className="h-4 w-4 shrink-0 text-gold" /><a href="tel:+919121023555">9121023555</a></li>
             <li className="flex gap-3"><Phone className="h-4 w-4 shrink-0 text-gold" /><a href="tel:+919121025777">9121025777</a></li>
             <li className="flex gap-3"><Mail className="h-4 w-4 shrink-0 text-gold" /><span>hello@viharivindu.in</span></li>
+            <li>
+              <button
+                type="button"
+                onClick={() => openWhatsApp(DEFAULT_WHATSAPP_MESSAGE)}
+                className="mt-2 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-xs font-semibold text-white shadow-soft transition hover:scale-[1.03]"
+              >
+                <MessageCircle className="h-3.5 w-3.5" /> WhatsApp Enquiry
+              </button>
+            </li>
           </ul>
         </div>
 
