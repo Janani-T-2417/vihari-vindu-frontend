@@ -75,11 +75,7 @@ function ContactPage() {
     e.preventDefault();
     if (!validate()) return;
 
-    const whatsappURL = buildWhatsAppUrl(form);
-    const whatsappWindow = window.open(whatsappURL, "_blank");
-    if (!whatsappWindow) {
-      window.location.href = whatsappURL;
-    }
+    openWhatsApp(buildContactMessage(form));
 
     setForm({ name: "", phone: "", email: "", message: "" });
     setErrors({});
