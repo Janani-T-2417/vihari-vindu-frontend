@@ -1,8 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Logo } from "./Logo";
+import { DEFAULT_WHATSAPP_MESSAGE, openWhatsApp } from "@/lib/whatsapp";
 
 const links = [
   { to: "/", label: "Home" },
@@ -70,7 +71,16 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex">
+          <div className="hidden items-center gap-2 lg:flex">
+            <button
+              type="button"
+              onClick={() => openWhatsApp(DEFAULT_WHATSAPP_MESSAGE)}
+              aria-label="WhatsApp Vihari Vindu"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-white shadow-soft transition-all hover:scale-[1.03]"
+            >
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp
+            </button>
             <a
               href="tel:+919121023555"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-luxe transition-all hover:scale-[1.03]"
@@ -114,6 +124,15 @@ export function Navbar() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => openWhatsApp(DEFAULT_WHATSAPP_MESSAGE)}
+                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white"
+                  >
+                    <MessageCircle className="h-4 w-4" /> WhatsApp 9121023555
+                  </button>
+                </li>
                 <li>
                   <a
                     href="tel:+919121023555"
