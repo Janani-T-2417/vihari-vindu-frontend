@@ -19,14 +19,28 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const next: Record<string, string> = {};
+    if (!form.name.trim()) next.name = "Name is required";
+    if (!form.phone.trim()) next.phone = "Phone is required";
+    if (!form.message.trim()) next.message = "Message is required";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hello, I'm ${form.name}.%0APhone: ${form.phone}%0AEmail: ${form.email}%0A%0A${form.message}`;
-    window.open(`https://wa.me/919121023555?text=${text}`, "_blank");
-    setSubmitted(true);
+    if (!validate()) return;
+
+    const whatsappMessage = `Hello Vihari Vindu,\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nMessage:\n${form.message}\n\nI am contacting through your website.`;
+    const whatsappURL = `https://wa.me/919121023555?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, "_blank");
+
+    setForm({ name: "", phone: "", email: "", message: "" });
+    setErrors({});
   };
 
   return (
@@ -89,7 +103,7 @@ function ContactPage() {
               <Phone className="h-4 w-4" /> Call Now
             </a>
             <a
-              href={"https://wa.me/919121023555?text=" + encodeURIComponent("Hello, I would like to enquire about Vihari Vindu.")}
+              href={"https://wa.me/919121023555?text=" + encodeURIComponent("Hello Vihari Vindu, I would like to know more about your rooms and food services.")}
               target="_blank" rel="noopener noreferrer"
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft"
             >
@@ -120,9 +134,13 @@ function ContactPage() {
                   type={f.type}
                   required={f.required}
                   value={(form as any)[f.k]}
-                  onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, [f.k]: e.target.value });
+                    if (errors[f.k]) setErrors((prev) => { const n = { ...prev }; delete n[f.k]; return n; });
+                  }}
                   className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
+                {errors[f.k] && <p className="mt-1 text-xs text-red-500">{errors[f.k]}</p>}
               </label>
             ))}
             <label className="block sm:col-span-2">
@@ -140,9 +158,13 @@ function ContactPage() {
                 required
                 rows={5}
                 value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                onChange={(e) => {
+                  setForm({ ...form, message: e.target.value });
+                  if (errors.message) setErrors((prev) => { const n = { ...prev }; delete n.message; return n; });
+                }}
                 className="mt-1.5 w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
+              {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
             </label>
           </div>
 
@@ -151,11 +173,8 @@ function ContactPage() {
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-navy px-7 py-3.5 text-sm font-semibold text-cream shadow-soft transition hover:bg-navy/90"
           >
             <Send className="h-4 w-4" />
-            {submitted ? "Message Sent — Thank You!" : "Send Message"}
+            Send Message
           </button>
-          {submitted && (
-            <p className="mt-3 text-xs text-muted-foreground">Your message opened in WhatsApp. We'll be in touch shortly.</p>
-          )}
         </motion.form>
 
         {/* Map */}
