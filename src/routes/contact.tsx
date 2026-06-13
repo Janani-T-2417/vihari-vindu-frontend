@@ -19,14 +19,28 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const next: Record<string, string> = {};
+    if (!form.name.trim()) next.name = "Name is required";
+    if (!form.phone.trim()) next.phone = "Phone is required";
+    if (!form.message.trim()) next.message = "Message is required";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hello, I'm ${form.name}.%0APhone: ${form.phone}%0AEmail: ${form.email}%0A%0A${form.message}`;
-    window.open(`https://wa.me/919121023555?text=${text}`, "_blank");
-    setSubmitted(true);
+    if (!validate()) return;
+
+    const whatsappMessage = `Hello Vihari Vindu,\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nMessage:\n${form.message}\n\nI am contacting through your website.`;
+    const whatsappURL = `https://wa.me/919121023555?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, "_blank");
+
+    setForm({ name: "", phone: "", email: "", message: "" });
+    setErrors({});
   };
 
   return (
