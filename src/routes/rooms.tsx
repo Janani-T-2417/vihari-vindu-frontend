@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Wifi, Tv, Car, Bell, Snowflake, MessageCircle, BedDouble } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
+import { openWhatsApp } from "@/lib/whatsapp";
 import roomDeluxe from "@/assets/room-deluxe.jpg";
 import roomDouble from "@/assets/room-double.jpg";
 import roomFamily from "@/assets/room-family.jpg";
@@ -36,8 +37,8 @@ const rooms = [
   { name: "Premium AC Room", price: "₹3,800", img: roomPremium, desc: "Our most refined room — king bed, lounge corner and panoramic views." },
 ];
 
-const wa = (n: string) =>
-  "https://wa.me/919121023555?text=" + encodeURIComponent(`Hello, I would like to book: ${n} at Vihari Vindu.`);
+const roomEnquiryMessage = (n: string) =>
+  `Hello Vihari Vindu,\n\nI would like to enquire about:\n\nRoom Type: ${n}\n\nPlease share availability and pricing details.`;
 
 function RoomsPage() {
   return (
