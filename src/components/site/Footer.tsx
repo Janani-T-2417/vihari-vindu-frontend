@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { Logo } from "./Logo";
+import { DEFAULT_WHATSAPP_MESSAGE, openWhatsApp } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
