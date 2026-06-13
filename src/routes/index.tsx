@@ -72,32 +72,50 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="max-w-3xl"
+          className="max-w-4xl"
         >
-          <div className="mb-6 inline-flex items-center gap-3 rounded-full glass px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cream">
-            <Sparkles className="h-3.5 w-3.5 text-gold" />
-            {slides[i].eyebrow} Vihari Vindu
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full glass px-5 py-2 text-xs font-bold uppercase tracking-[0.3em] text-white">
+            <Sparkles className="h-3.5 w-3.5" style={{ color: "#E6C78B" }} />
+            {slides[i].eyebrow} a 5-Star Experience
           </div>
-          <h1 className="font-display text-5xl font-bold leading-[1.05] text-cream drop-shadow-[0_4px_30px_rgba(0,0,0,0.4)] sm:text-6xl md:text-7xl lg:text-8xl">
-            Where tradition <br /> meets <span className="text-gradient-gold">luxury</span>
+          <h1
+            className="font-display font-extrabold leading-[1.02] text-white drop-shadow-[0_6px_40px_rgba(0,0,0,0.55)]"
+            style={{ fontSize: "clamp(3rem, 8vw, 6rem)" }}
+          >
+            VIHARI <span className="text-gradient-gold">VINDU</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-cream/85">
-            Tiffins · Meals · Luxury Rooms — A refined hospitality address in
-            the heart of Chirala, Andhra Pradesh.
+          <p className="mt-5 text-xl font-semibold text-white sm:text-2xl" style={{ color: "#E6C78B" }}>
+            Premium Tiffins • Delicious Meals • Luxury Rooms
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <p className="mt-3 max-w-xl text-base text-white/90 sm:text-lg">
+            Opp. Santhi Theatre, Masid Centre, Chirala — Andhra Pradesh
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              to="/rooms"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-4 text-sm font-bold uppercase tracking-wider text-navy shadow-luxe transition hover:scale-105"
+              to="/tiffins"
+              className="group inline-flex items-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-luxe transition-all hover:scale-105"
+              style={{ backgroundColor: "#C89B3C", borderRadius: "14px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#E6C78B"; e.currentTarget.style.color = "#222222"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#C89B3C"; e.currentTarget.style.color = "#ffffff"; }}
             >
-              <BedDouble className="h-4 w-4" /> Book a Room
+              <UtensilsCrossed className="h-4 w-4" /> Explore Menu
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/tiffins"
-              className="group inline-flex items-center gap-2 rounded-full glass px-7 py-4 text-sm font-bold uppercase tracking-wider text-cream transition hover:bg-cream/20"
+              to="/rooms"
+              className="group inline-flex items-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-luxe transition-all hover:scale-105"
+              style={{ backgroundColor: "#C89B3C", borderRadius: "14px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#E6C78B"; e.currentTarget.style.color = "#222222"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#C89B3C"; e.currentTarget.style.color = "#ffffff"; }}
             >
-              <UtensilsCrossed className="h-4 w-4" /> Explore Menu
+              <BedDouble className="h-4 w-4" /> View Rooms
+            </Link>
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-wider transition-all hover:scale-105"
+              style={{ backgroundColor: "rgba(252,252,252,0.95)", color: "#222222", borderRadius: "14px" }}
+            >
+              Contact Us
             </Link>
           </div>
         </motion.div>
@@ -108,7 +126,8 @@ function Hero() {
               key={idx}
               onClick={() => setI(idx)}
               aria-label={`Slide ${idx + 1}`}
-              className={`h-1.5 rounded-full transition-all ${idx === i ? "w-10 bg-gold" : "w-5 bg-cream/40"}`}
+              className={`h-1.5 rounded-full transition-all ${idx === i ? "w-10" : "w-5"}`}
+              style={{ backgroundColor: idx === i ? "#E6C78B" : "rgba(252,252,252,0.5)" }}
             />
           ))}
         </div>
