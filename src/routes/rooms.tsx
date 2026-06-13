@@ -84,10 +84,10 @@ function RoomsPage() {
               </div>
 
               <div className="mt-auto flex flex-col gap-2 pt-7 sm:flex-row">
-                <a href={wa(r.name)} target="_blank" rel="noopener noreferrer"
+                <button type="button" onClick={() => openWhatsApp(roomEnquiryMessage(r.name))}
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:scale-[1.02]">
-                  <MessageCircle className="h-4 w-4" /> Book Enquiry
-                </a>
+                  <MessageCircle className="h-4 w-4" /> Enquire Now
+                </button>
                 <a href="tel:+919121023555"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe transition hover:scale-[1.02]">
                   <BedDouble className="h-4 w-4" /> Call to Book
