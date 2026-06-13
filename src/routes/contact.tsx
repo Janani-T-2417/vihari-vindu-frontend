@@ -176,19 +176,13 @@ function ContactPage() {
             >
               <Phone className="h-4 w-4" /> Call Now
             </a>
-            <a
-              href={
-                "https://wa.me/919121023555?text=" +
-                encodeURIComponent(
-                  "Hello Vihari Vindu, I would like to know more about your rooms and food services.",
-                )
-              }
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => openWhatsApp(DEFAULT_WHATSAPP_MESSAGE)}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
+            </button>
           </div>
         </motion.div>
 
