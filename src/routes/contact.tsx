@@ -1,15 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import heroRestaurant from "@/assets/hero-restaurant.jpg";
 
+const WHATSAPP_PHONE = "919121023555";
+
+type ContactForm = {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+};
+
+type RequiredField = "name" | "phone" | "message";
+
+const buildWhatsAppUrl = (form: ContactForm) => {
+  const whatsappMessage = `Hello Vihari Vindu,
+
+Name: ${form.name.trim()}
+
+Phone: ${form.phone.trim()}
+
+Email: ${form.email.trim()}
+
+Message:
+${form.message.trim()}
+
+I am contacting you through your website.`;
+
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
+};
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Vihari Vindu" },
-      { name: "description", content: "Reach Vihari Vindu hotel & restaurant in Chirala. Call 9121023555 / 9121025777 or send us a message." },
+      {
+        name: "description",
+        content:
+          "Reach Vihari Vindu hotel & restaurant in Chirala. Call 9121023555 / 9121025777 or send us a message.",
+      },
       { property: "og:title", content: "Contact Vihari Vindu" },
       { property: "og:description", content: "Hotel & restaurant in Chirala, Andhra Pradesh." },
       { property: "og:image", content: heroRestaurant },
@@ -19,8 +51,23 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [form, setForm] = useState<ContactForm>({ name: "", phone: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const contactFields: Array<{ k: "name" | "phone"; label: string; type: string }> = [
+    { k: "name", label: "Name", type: "text" },
+    { k: "phone", label: "Phone", type: "tel" },
+  ];
+
+  const clearFieldError = (field: RequiredField) => {
+    if (!errors[field]) return;
+
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
 
   const validate = () => {
     const next: Record<string, string> = {};
@@ -31,13 +78,15 @@ function ContactPage() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
 
-    const whatsappMessage = `Hello Vihari Vindu,\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nMessage:\n${form.message}\n\nI am contacting through your website.`;
-    const whatsappURL = `https://wa.me/919121023555?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(whatsappURL, "_blank");
+    const whatsappURL = buildWhatsAppUrl(form);
+    const whatsappWindow = window.open(whatsappURL, "_blank");
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
+    }
 
     setForm({ name: "", phone: "", email: "", message: "" });
     setErrors({});
@@ -47,7 +96,11 @@ function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title={<>Let's <span className="text-gradient-gold">connect</span></>}
+        title={
+          <>
+            Let's <span className="text-gradient-gold">connect</span>
+          </>
+        }
         subtitle="Reach out for reservations, group bookings or any questions — our team will get back to you promptly."
         image={heroRestaurant}
       />
@@ -62,22 +115,51 @@ function ContactPage() {
         >
           {[
             {
-              icon: MapPin, t: "Visit us",
-              d: <>Opp. Santhi Theatre, Masid Centre,<br />Chirala, Bapatla District,<br />Andhra Pradesh</>,
+              icon: MapPin,
+              t: "Visit us",
+              d: (
+                <>
+                  Opp. Santhi Theatre, Masid Centre,
+                  <br />
+                  Chirala, Bapatla District,
+                  <br />
+                  Andhra Pradesh
+                </>
+              ),
             },
             {
-              icon: Phone, t: "Call us",
+              icon: Phone,
+              t: "Call us",
               d: (
                 <div className="space-y-1">
-                  <a href="tel:+919121023555" className="block hover:text-gold-dark">9121023555</a>
-                  <a href="tel:+919121025777" className="block hover:text-gold-dark">9121025777</a>
+                  <a href="tel:+919121023555" className="block hover:text-gold-dark">
+                    9121023555
+                  </a>
+                  <a href="tel:+919121025777" className="block hover:text-gold-dark">
+                    9121025777
+                  </a>
                 </div>
               ),
             },
-            { icon: Mail, t: "Email", d: <a href="mailto:hello@viharivindu.in" className="hover:text-gold-dark">hello@viharivindu.in</a> },
             {
-              icon: Clock, t: "Business hours",
-              d: <>Restaurant: 6:30 AM – 11:00 PM<br />Front Desk: 24 / 7</>,
+              icon: Mail,
+              t: "Email",
+              d: (
+                <a href="mailto:hello@viharivindu.in" className="hover:text-gold-dark">
+                  hello@viharivindu.in
+                </a>
+              ),
+            },
+            {
+              icon: Clock,
+              t: "Business hours",
+              d: (
+                <>
+                  Restaurant: 6:30 AM – 11:00 PM
+                  <br />
+                  Front Desk: 24 / 7
+                </>
+              ),
             },
           ].map((c, i) => (
             <motion.div
@@ -99,12 +181,21 @@ function ContactPage() {
           ))}
 
           <div className="flex flex-col gap-2 sm:flex-row">
-            <a href="tel:+919121023555" className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe">
+            <a
+              href="tel:+919121023555"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe"
+            >
               <Phone className="h-4 w-4" /> Call Now
             </a>
             <a
-              href={"https://wa.me/919121023555?text=" + encodeURIComponent("Hello Vihari Vindu, I would like to know more about your rooms and food services.")}
-              target="_blank" rel="noopener noreferrer"
+              href={
+                "https://wa.me/919121023555?text=" +
+                encodeURIComponent(
+                  "Hello Vihari Vindu, I would like to know more about your rooms and food services.",
+                )
+              }
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
@@ -121,22 +212,23 @@ function ContactPage() {
           className="rounded-3xl bg-card p-8 shadow-luxe lg:col-span-3"
         >
           <h2 className="font-display text-3xl font-bold text-navy">Send a message</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Tell us how we can help — we'll respond as soon as possible.</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Tell us how we can help — we'll respond as soon as possible.
+          </p>
 
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
-            {[
-              { k: "name", label: "Name", type: "text", required: true },
-              { k: "phone", label: "Phone", type: "tel", required: true },
-            ].map((f) => (
+            {contactFields.map((f) => (
               <label key={f.k} className="block">
-                <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">{f.label}</span>
+                <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">
+                  {f.label}
+                </span>
                 <input
                   type={f.type}
-                  required={f.required}
-                  value={(form as any)[f.k]}
+                  value={form[f.k]}
+                  aria-invalid={Boolean(errors[f.k])}
                   onChange={(e) => {
                     setForm({ ...form, [f.k]: e.target.value });
-                    if (errors[f.k]) setErrors((prev) => { const n = { ...prev }; delete n[f.k]; return n; });
+                    clearFieldError(f.k);
                   }}
                   className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
@@ -144,7 +236,9 @@ function ContactPage() {
               </label>
             ))}
             <label className="block sm:col-span-2">
-              <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">Email</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">
+                Email
+              </span>
               <input
                 type="email"
                 value={form.email}
@@ -153,14 +247,16 @@ function ContactPage() {
               />
             </label>
             <label className="block sm:col-span-2">
-              <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">Message</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">
+                Message
+              </span>
               <textarea
-                required
                 rows={5}
                 value={form.message}
+                aria-invalid={Boolean(errors.message)}
                 onChange={(e) => {
                   setForm({ ...form, message: e.target.value });
-                  if (errors.message) setErrors((prev) => { const n = { ...prev }; delete n.message; return n; });
+                  clearFieldError("message");
                 }}
                 className="mt-1.5 w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
