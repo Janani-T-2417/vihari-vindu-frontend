@@ -23,9 +23,30 @@ export function MenuItemModal({
     };
   }, [open, onClose]);
 
-  const wa =
-    "https://wa.me/919121023555?text=" +
-    encodeURIComponent(`Hello, I would like to enquire about: ${item.name} (₹${item.price}) at Vihari Vindu.`);
+  const handleWhatsAppEnquiry = () => {
+    const message = `Hello Vihari Vindu,
+
+I would like to enquire about:
+
+Product: ${item.name}
+Price: ₹${item.price}
+
+Please provide more details.
+
+Name:
+Phone:
+
+Thank You.`;
+
+    const encoded = encodeURIComponent(message);
+    const waUrl = `https://wa.me/919121023555?text=${encoded}`;
+    const webUrl = `https://web.whatsapp.com/send?phone=919121023555&text=${encoded}`;
+
+    const popup = window.open(waUrl, "_blank");
+    if (!popup) {
+      window.location.href = waUrl;
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -63,14 +84,13 @@ export function MenuItemModal({
               <div className="mt-2 font-display text-3xl font-bold text-gradient-gold">₹{item.price}</div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
               <div className="mt-auto flex flex-col gap-2 pt-6 sm:flex-row">
-                <a
-                  href={wa}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={handleWhatsAppEnquiry}
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:scale-[1.02]"
                 >
                   <MessageCircle className="h-4 w-4" /> WhatsApp Enquiry
-                </a>
+                </button>
                 <a
                   href="tel:+919121023555"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe transition hover:scale-[1.02]"
@@ -85,3 +105,4 @@ export function MenuItemModal({
     </AnimatePresence>
   );
 }
+
