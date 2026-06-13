@@ -3,9 +3,8 @@ import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
+import { DEFAULT_WHATSAPP_MESSAGE, openWhatsApp } from "@/lib/whatsapp";
 import heroRestaurant from "@/assets/hero-restaurant.jpg";
-
-const WHATSAPP_PHONE = "919121023555";
 
 type ContactForm = {
   name: string;
@@ -16,22 +15,16 @@ type ContactForm = {
 
 type RequiredField = "name" | "phone" | "message";
 
-const buildWhatsAppUrl = (form: ContactForm) => {
-  const whatsappMessage = `Hello Vihari Vindu,
+const buildContactMessage = (form: ContactForm) => `Hello Vihari Vindu,
 
 Name: ${form.name.trim()}
-
 Phone: ${form.phone.trim()}
-
 Email: ${form.email.trim()}
 
 Message:
 ${form.message.trim()}
 
-I am contacting you through your website.`;
-
-  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
-};
+I am contacting through your website.`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
