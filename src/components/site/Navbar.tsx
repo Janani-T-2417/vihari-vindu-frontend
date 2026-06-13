@@ -30,37 +30,37 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-2" : "py-4"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 shadow-navbar`}
+      style={{ backgroundColor: "#FCFCFC" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div
-          className={`flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-500 ${
-            scrolled ? "glass shadow-soft" : "bg-transparent"
+          className={`flex items-center justify-between transition-all duration-300 ${
+            scrolled ? "h-[90px]" : "h-[110px]"
           }`}
         >
           <Link to="/" aria-label="Vihari Vindu home">
-            <Logo />
+            <Logo size={scrolled ? 52 : 64} />
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-2 lg:flex">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
-                className="group relative rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-                activeProps={{ className: "text-navy" }}
+                className="group relative rounded-full px-4 py-2.5 text-[15px] font-bold tracking-wide transition-colors"
+                style={{ color: "#222222" }}
+                activeProps={{ style: { color: "#C89B3C" } }}
               >
                 {({ isActive }) => (
                   <>
-                    <span className="relative z-10">{l.label}</span>
+                    <span className="relative z-10 transition-colors hover:text-[#C89B3C]">{l.label}</span>
                     {isActive && (
                       <motion.span
-                        layoutId="nav-pill"
-                        className="absolute inset-0 -z-0 rounded-full bg-gradient-gold/80"
-                        style={{ background: "var(--gradient-gold)", opacity: 0.18 }}
+                        layoutId="nav-underline"
+                        className="absolute inset-x-3 -bottom-0.5 h-[3px] rounded-full"
+                        style={{ background: "var(--gradient-gold)" }}
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -73,7 +73,8 @@ export function Navbar() {
           <div className="hidden lg:flex">
             <a
               href="tel:+919121023555"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-2.5 text-sm font-semibold text-navy shadow-luxe transition-transform hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-luxe transition-all hover:scale-[1.03]"
+              style={{ backgroundColor: "#C89B3C" }}
             >
               <Phone className="h-4 w-4" />
               9121023555
@@ -83,7 +84,8 @@ export function Navbar() {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
-            className="grid h-11 w-11 place-items-center rounded-full glass lg:hidden"
+            className="grid h-12 w-12 place-items-center rounded-full border lg:hidden"
+            style={{ borderColor: "#E6C78B", color: "#222222" }}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
