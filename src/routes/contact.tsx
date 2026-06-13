@@ -134,9 +134,13 @@ function ContactPage() {
                   type={f.type}
                   required={f.required}
                   value={(form as any)[f.k]}
-                  onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, [f.k]: e.target.value });
+                    if (errors[f.k]) setErrors((prev) => { const n = { ...prev }; delete n[f.k]; return n; });
+                  }}
                   className="mt-1.5 w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
                 />
+                {errors[f.k] && <p className="mt-1 text-xs text-red-500">{errors[f.k]}</p>}
               </label>
             ))}
             <label className="block sm:col-span-2">
@@ -154,9 +158,13 @@ function ContactPage() {
                 required
                 rows={5}
                 value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                onChange={(e) => {
+                  setForm({ ...form, message: e.target.value });
+                  if (errors.message) setErrors((prev) => { const n = { ...prev }; delete n.message; return n; });
+                }}
                 className="mt-1.5 w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30"
               />
+              {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
             </label>
           </div>
 
@@ -165,11 +173,8 @@ function ContactPage() {
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-navy px-7 py-3.5 text-sm font-semibold text-cream shadow-soft transition hover:bg-navy/90"
           >
             <Send className="h-4 w-4" />
-            {submitted ? "Message Sent — Thank You!" : "Send Message"}
+            Send Message
           </button>
-          {submitted && (
-            <p className="mt-3 text-xs text-muted-foreground">Your message opened in WhatsApp. We'll be in touch shortly.</p>
-          )}
         </motion.form>
 
         {/* Map */}

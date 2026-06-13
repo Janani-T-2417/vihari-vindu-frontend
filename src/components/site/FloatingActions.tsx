@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 const WHATSAPP_URL =
   "https://wa.me/919121023555?text=" +
-  encodeURIComponent("Hello, I would like to enquire about Vihari Vindu.");
+  encodeURIComponent("Hello Vihari Vindu, I would like to know more about your rooms and food services.");
 
 export function FloatingActions() {
   const [show, setShow] = useState(false);
