@@ -1,9 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import heroRestaurant from "@/assets/hero-restaurant.jpg";
+
+const WHATSAPP_PHONE = "919121023555";
+
+const buildWhatsAppUrl = (form: { name: string; phone: string; email: string; message: string }) => {
+  const whatsappMessage = `Hello Vihari Vindu,
+
+Name: ${form.name.trim()}
+
+Phone: ${form.phone.trim()}
+
+Email: ${form.email.trim()}
+
+Message:
+${form.message.trim()}
+
+I am contacting you through your website.`;
+
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
+};
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -31,13 +50,15 @@ function ContactPage() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
 
-    const whatsappMessage = `Hello Vihari Vindu,\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\nMessage:\n${form.message}\n\nI am contacting through your website.`;
-    const whatsappURL = `https://wa.me/919121023555?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(whatsappURL, "_blank");
+    const whatsappURL = buildWhatsAppUrl(form);
+    const whatsappWindow = window.open(whatsappURL, "_blank", "noopener,noreferrer");
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
+    }
 
     setForm({ name: "", phone: "", email: "", message: "" });
     setErrors({});
@@ -125,15 +146,15 @@ function ContactPage() {
 
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
             {[
-              { k: "name", label: "Name", type: "text", required: true },
-              { k: "phone", label: "Phone", type: "tel", required: true },
+              { k: "name", label: "Name", type: "text" },
+              { k: "phone", label: "Phone", type: "tel" },
             ].map((f) => (
               <label key={f.k} className="block">
                 <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">{f.label}</span>
                 <input
                   type={f.type}
-                  required={f.required}
                   value={(form as any)[f.k]}
+                  aria-invalid={Boolean(errors[f.k])}
                   onChange={(e) => {
                     setForm({ ...form, [f.k]: e.target.value });
                     if (errors[f.k]) setErrors((prev) => { const n = { ...prev }; delete n[f.k]; return n; });
@@ -155,9 +176,9 @@ function ContactPage() {
             <label className="block sm:col-span-2">
               <span className="text-xs font-semibold uppercase tracking-widest text-navy/70">Message</span>
               <textarea
-                required
                 rows={5}
                 value={form.message}
+                aria-invalid={Boolean(errors.message)}
                 onChange={(e) => {
                   setForm({ ...form, message: e.target.value });
                   if (errors.message) setErrors((prev) => { const n = { ...prev }; delete n.message; return n; });
