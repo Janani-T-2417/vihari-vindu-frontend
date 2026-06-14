@@ -419,7 +419,7 @@ function Home() {
           <h3 className="font-display text-3xl font-bold text-navy sm:text-5xl">Ready to experience Vihari Vindu?</h3>
           <p className="mx-auto mt-3 max-w-xl text-navy/80">Reserve your room or table — our team is one call away.</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <a href="tel:+919121023555" className="rounded-full bg-navy px-7 py-3 text-sm font-bold text-cream shadow-soft transition hover:scale-105">Call 9121023555</a>
+            <a href="tel:+919121025777" className="rounded-full bg-navy px-7 py-3 text-sm font-bold text-cream shadow-soft transition hover:scale-105">Call 9121025777</a>
             <Link to="/contact" className="rounded-full border border-navy/30 bg-cream/80 px-7 py-3 text-sm font-bold text-navy">Contact Us</Link>
           </div>
         </div>

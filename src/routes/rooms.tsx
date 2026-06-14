@@ -84,7 +84,7 @@ function RoomsPage() {
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:scale-[1.02]">
                   <MessageCircle className="h-4 w-4" /> Enquire Now
                 </button>
-                <a href="tel:+919121023555"
+                <a href="tel:+919121025777"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe transition hover:scale-[1.02]">
                   <BedDouble className="h-4 w-4" /> Call to Book
                 </a>
