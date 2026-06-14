@@ -79,7 +79,7 @@ Please provide more details.`);
                   <MessageCircle className="h-4 w-4" /> WhatsApp Enquiry
                 </button>
                 <a
-                  href="tel:+919121023555"
+                  href="tel:+919121025777"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe transition hover:scale-[1.02]"
                 >
                   <Phone className="h-4 w-4" /> Call Us

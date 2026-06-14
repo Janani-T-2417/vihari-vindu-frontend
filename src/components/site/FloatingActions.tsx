@@ -30,7 +30,7 @@ export function FloatingActions() {
       </AnimatePresence>
 
       <a
-        href="tel:+919121023555"
+        href="tel:+919121025777"
         aria-label="Call Vihari Vindu"
         className="grid h-12 w-12 place-items-center rounded-full bg-gradient-gold text-navy shadow-luxe transition hover:scale-105"
       >

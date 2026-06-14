@@ -121,7 +121,7 @@ function ContactPage() {
               t: "Call us",
               d: (
                 <div className="space-y-1">
-                  <a href="tel:+919121023555" className="block hover:text-gold-dark">
+                  <a href="tel:+919121025777" className="block hover:text-gold-dark">
                     9121023555
                   </a>
                   <a href="tel:+919121025777" className="block hover:text-gold-dark">
@@ -171,7 +171,7 @@ function ContactPage() {
 
           <div className="flex flex-col gap-2 sm:flex-row">
             <a
-              href="tel:+919121023555"
+              href="tel:+919121025777"
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe"
             >
               <Phone className="h-4 w-4" /> Call Now

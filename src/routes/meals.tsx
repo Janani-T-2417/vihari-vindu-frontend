@@ -60,7 +60,7 @@ const categories = [
 ];
 
 const wa = (name: string) =>
-  "https://wa.me/919121023555?text=" +
+  "https://wa.me/919121025777?text=" +
   encodeURIComponent(`Hello, I would like to enquire about: ${name} at Vihari Vindu.`);
 
 function MealsPage() {
@@ -109,7 +109,7 @@ function MealsPage() {
                 >
                   <MessageCircle className="h-4 w-4" /> Enquire on WhatsApp
                 </a>
-                <a href="tel:+919121023555" className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-6 py-3 text-sm font-semibold text-navy shadow-luxe">
+                <a href="tel:+919121025777" className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-6 py-3 text-sm font-semibold text-navy shadow-luxe">
                   Call to Reserve
                 </a>
               </div>

@@ -31,10 +31,10 @@ const amenities = [
 ];
 
 const rooms = [
-  { name: "Deluxe Room", price: "₹1,800", img: roomDeluxe, desc: "Spacious deluxe room with a queen bed, work area and premium amenities." },
-  { name: "Double Deluxe Room", price: "₹2,400", img: roomDouble, desc: "Two queen beds, ideal for friends or small families travelling together." },
-  { name: "Family Room", price: "₹3,200", img: roomFamily, desc: "A generous suite for families — multiple beds, lounge area and extra space." },
-  { name: "Premium AC Room", price: "₹3,800", img: roomPremium, desc: "Our most refined room — king bed, lounge corner and panoramic views." },
+  { name: "Deluxe Room", img: roomDeluxe, desc: "Spacious deluxe room with a queen bed, work area and premium amenities." },
+  { name: "Double Deluxe Room", img: roomDouble, desc: "Two queen beds, ideal for friends or small families travelling together." },
+  { name: "Family Room", img: roomFamily, desc: "A generous suite for families — multiple beds, lounge area and extra space." },
+  { name: "Premium AC Room", img: roomPremium, desc: "Our most refined room — king bed, lounge corner and panoramic views." },
 ];
 
 const roomEnquiryMessage = (n: string) =>
@@ -68,10 +68,6 @@ function RoomsPage() {
             <div className="flex flex-col p-8 lg:col-span-2 lg:p-10">
               <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-dark">Room Type</div>
               <h2 className="mt-2 font-display text-3xl font-bold text-navy">{r.name}</h2>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="font-display text-3xl font-bold text-gradient-gold">{r.price}</span>
-                <span className="text-xs text-muted-foreground">/ night onwards</span>
-              </div>
               <p className="mt-4 text-sm text-muted-foreground">{r.desc}</p>
 
               <div className="mt-6 grid grid-cols-5 gap-3">
@@ -88,7 +84,7 @@ function RoomsPage() {
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:scale-[1.02]">
                   <MessageCircle className="h-4 w-4" /> Enquire Now
                 </button>
-                <a href="tel:+919121023555"
+                <a href="tel:+919121025777"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-navy shadow-luxe transition hover:scale-[1.02]">
                   <BedDouble className="h-4 w-4" /> Call to Book
                 </a>
