@@ -13,18 +13,32 @@ export function Footer() {
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
           <div className="rounded-2xl bg-cream/5 p-4">
-            <Logo />
+            <Logo variant="light" size={56} />
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-cream/70">
+          <p className="mt-4 text-sm leading-relaxed text-white/80">
             A refined hospitality address in Chirala — where authentic Andhra
             flavours meet luxury comfort.
           </p>
           <div className="mt-4 flex gap-3">
-            <a href="#" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-full border border-gold/30 transition hover:bg-gold hover:text-navy">
-              <Instagram className="h-4 w-4" />
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="group grid h-11 w-11 place-items-center rounded-full transition-all duration-300 hover:scale-110"
+              style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#E6C78B")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.12)")}
+            >
+              <Instagram className="h-5 w-5 text-white group-hover:text-[#222222]" />
             </a>
-            <a href="#" aria-label="Facebook" className="grid h-9 w-9 place-items-center rounded-full border border-gold/30 transition hover:bg-gold hover:text-navy">
-              <Facebook className="h-4 w-4" />
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="group grid h-11 w-11 place-items-center rounded-full transition-all duration-300 hover:scale-110"
+              style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#E6C78B")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.12)")}
+            >
+              <Facebook className="h-5 w-5 text-white group-hover:text-[#222222]" />
             </a>
           </div>
         </div>
@@ -45,14 +59,20 @@ export function Footer() {
 
         <div>
           <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gradient-gold">Contact</h4>
-          <ul className="space-y-3 text-sm text-cream/80">
+          <ul className="space-y-3 text-sm" style={{ color: "#FFFFFF" }}>
             <li className="flex gap-3">
               <MapPin className="h-4 w-4 shrink-0 text-gold" />
-              <span>Opp. Santhi Theatre, Masid Centre,<br />Chirala, Bapatla District,<br />Andhra Pradesh</span>
+              <span className="text-white/90">Opp. Santhi Theatre, Masid Centre,<br />Chirala, Bapatla District,<br />Andhra Pradesh</span>
             </li>
-            <li className="flex gap-3"><Phone className="h-4 w-4 shrink-0 text-gold" /><a href="tel:+919121023555">9121023555</a></li>
-            <li className="flex gap-3"><Phone className="h-4 w-4 shrink-0 text-gold" /><a href="tel:+919121025777">9121025777</a></li>
-            <li className="flex gap-3"><Mail className="h-4 w-4 shrink-0 text-gold" /><span>hello@viharivindu.in</span></li>
+            <li className="flex gap-3">
+              <Phone className="h-4 w-4 shrink-0 text-gold" />
+              <a href="tel:+919121025777" className="text-white hover:text-[#E6C78B]" style={{ fontWeight: 600 }}>9121025777</a>
+            </li>
+            <li className="flex gap-3">
+              <Phone className="h-4 w-4 shrink-0 text-gold" />
+              <a href="tel:+919121023555" className="text-white hover:text-[#E6C78B]" style={{ fontWeight: 600 }}>9121023555</a>
+            </li>
+            <li className="flex gap-3"><Mail className="h-4 w-4 shrink-0 text-gold" /><span className="text-white/90">hello@viharivindu.in</span></li>
             <li>
               <button
                 type="button"
