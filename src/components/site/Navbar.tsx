@@ -82,12 +82,12 @@ export function Navbar() {
               WhatsApp
             </button>
             <a
-              href="tel:+919121023555"
+              href="tel:+919121025777"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-luxe transition-all hover:scale-[1.03]"
               style={{ backgroundColor: "#C89B3C" }}
             >
               <Phone className="h-4 w-4" />
-              9121023555
+              9121025777
             </a>
           </div>
 
@@ -130,15 +130,15 @@ export function Navbar() {
                     onClick={() => openWhatsApp(DEFAULT_WHATSAPP_MESSAGE)}
                     className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white"
                   >
-                    <MessageCircle className="h-4 w-4" /> WhatsApp 9121023555
+                    <MessageCircle className="h-4 w-4" /> WhatsApp 9121025777
                   </button>
                 </li>
                 <li>
                   <a
-                    href="tel:+919121023555"
+                    href="tel:+919121025777"
                     className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-gold px-4 py-3 text-sm font-semibold text-navy"
                   >
-                    <Phone className="h-4 w-4" /> Call 9121023555
+                    <Phone className="h-4 w-4" /> Call 9121025777
                   </a>
                 </li>
               </ul>

@@ -1,14 +1,12 @@
-export const WHATSAPP_PRIMARY = "919121023555";
-export const WHATSAPP_DISPLAY_PRIMARY = "9121023555";
-export const WHATSAPP_DISPLAY_SECONDARY = "9121025777";
+export const WHATSAPP_PRIMARY = "919121025777";
+export const WHATSAPP_DISPLAY_PRIMARY = "9121025777";
+export const WHATSAPP_DISPLAY_SECONDARY = "9121023555";
 
 export const DEFAULT_WHATSAPP_MESSAGE = `Hello Vihari Vindu,
 
-I would like to know more about your food services, meals and luxury rooms.
+I would like to know more about your rooms and food services.
 
-Phone:
-9121023555
-9121025777`;
+I am contacting through your website.`;
 
 export function buildWhatsAppUrl(message: string, phone: string = WHATSAPP_PRIMARY) {
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;

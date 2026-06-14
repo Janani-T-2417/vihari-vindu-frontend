@@ -74,8 +74,11 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="max-w-4xl"
         >
-          <div className="mb-6 inline-flex items-center gap-3 rounded-full glass px-5 py-2 text-xs font-bold uppercase tracking-[0.3em] text-white">
-            <Sparkles className="h-3.5 w-3.5" style={{ color: "#E6C78B" }} />
+          <div
+            className="mb-6 inline-flex items-center gap-3 rounded-full px-5 py-2 text-xs font-extrabold uppercase tracking-[0.3em] shadow-soft"
+            style={{ backgroundColor: "#FCFCFC", color: "#222222" }}
+          >
+            <Sparkles className="h-3.5 w-3.5" style={{ color: "#C89B3C" }} />
             {slides[i].eyebrow} a 5-Star Experience
           </div>
           <h1
