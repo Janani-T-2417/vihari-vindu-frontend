@@ -313,16 +313,25 @@ function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="relative overflow-hidden bg-navy py-24 text-cream">
-        <div className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-gold/20 blur-3xl" />
-        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-soft-blue/20 blur-3xl" />
+      <section className="relative overflow-hidden py-24" style={{ backgroundColor: "#1a1a2e" }}>
+        <div className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-gold/10 blur-3xl" />
+        <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-soft-blue/10 blur-3xl" />
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-14 max-w-2xl">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Why choose us
+          <div className="mb-14 max-w-3xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em]" style={{ backgroundColor: "rgba(230,199,139,0.15)", color: "#E6C78B" }}>
+              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "#E6C78B" }} /> Why choose us
             </div>
-            <h2 className="font-display text-4xl font-bold leading-tight sm:text-5xl">
-              A complete experience — <span className="text-gradient-gold">stay, dine, celebrate</span>
+            <h2
+              className="font-display font-extrabold"
+              style={{
+                color: "#FFFFFF",
+                textShadow: "0px 2px 15px rgba(0,0,0,0.35)",
+                lineHeight: 1.1,
+                fontSize: "clamp(42px, 5.5vw, 72px)",
+              }}
+            >
+              A complete experience —{" "}
+              <span style={{ color: "#E6C78B", fontWeight: 800 }}>stay, dine, celebrate</span>
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-4">
@@ -338,13 +347,22 @@ function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.08 }}
-                className="glass-dark rounded-3xl p-6"
+                className="group rounded-3xl p-6 transition-all duration-500"
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(230,199,139,0.35)",
+                  boxShadow: "0px 10px 30px rgba(0,0,0,0.25)",
+                }}
+                whileHover={{
+                  borderColor: "#E6C78B",
+                  boxShadow: "0px 16px 40px rgba(0,0,0,0.35)",
+                }}
               >
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-gold text-navy">
                   <f.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-5 font-display text-xl font-semibold text-cream">{f.t}</h3>
-                <p className="mt-2 text-sm text-cream/70">{f.d}</p>
+                <h3 className="mt-5 font-display text-xl font-bold" style={{ color: "#FFFFFF" }}>{f.t}</h3>
+                <p className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.92)" }}>{f.d}</p>
               </motion.div>
             ))}
           </div>
